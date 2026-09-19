@@ -64,47 +64,48 @@ def interactive_mode():
             print(f"\n❌ Error: {e}\n")
 
 def demo_mode():
-    """Ejecuta una demostración automática del agente."""
     print("=" * 60)
     print(" " * 18 + "🎬 MODO DEMOSTRACIÓN 🎬")
     print("=" * 60)
-    
+
     agent = create_agent()
-    
+
     # Escenario 1: Consultar pedido
     print("\n--- Escenario 1: Consultar estado de pedido ---")
     user_msg = "¿Dónde está mi pedido 123?"
     print(f"👤 Tú: {user_msg}")
     response = agent.chat(user_msg)
     print(f"🤖 Agente: {response}\n")
-    
+    agent.clear_history()
+
     # Escenario 2: Verificar fecha de entrega
     print("--- Escenario 2: Verificar fecha de entrega ---")
     user_msg = "¿Cuándo llega el pedido 456?"
     print(f"👤 Tú: {user_msg}")
     response = agent.chat(user_msg)
     print(f"🤖 Agente: {response}\n")
-    
+    agent.clear_history()
+
     # Escenario 3: Listar pedidos de usuario
     print("--- Escenario 3: Listar pedidos de usuario ---")
     user_msg = "Lista mis pedidos con email maria@example.com"
     print(f"👤 Tú: {user_msg}")
     response = agent.chat(user_msg)
     print(f"🤖 Agente: {response}\n")
-    
-    # Escenario 4: Crear ticket (requiere confirmación)
+    agent.clear_history()
+
+    # Escenario 4: Crear ticket de soporte
     print("--- Escenario 4: Crear ticket de soporte ---")
-    user_msg = "Quiero reportar un problema, mi pedido no llegó"
+    user_msg = "Quiero abrir un ticket de soporte. Mi pedido no llegó."
     print(f"👤 Tú: {user_msg}")
     response = agent.chat(user_msg)
     print(f"🤖 Agente: {response}\n")
-    
-    # Confirmar creación de ticket
+
     user_msg = "Sí, confirma el ticket con email juan@example.com"
     print(f"👤 Tú: {user_msg}")
     response = agent.chat(user_msg, user_confirmed=True)
     print(f"🤖 Agente: {response}\n")
-    
+
     print("=" * 60)
     print("✅ Demostración completada!")
     print("=" * 60)

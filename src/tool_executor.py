@@ -72,23 +72,10 @@ class ToolExecutor:
         return tool_name in self.sensitive_tools
     
     def execute_tool(self, tool_name: str, parameters: Dict[str, Any], confirmed: bool = True) -> Dict[str, Any]:
-        """
-        Ejecuta una herramienta.
-        
-        Args:
-            tool_name: Nombre de la herramienta.
-            parameters: Parámetros para la herramienta.
-            confirmed: Si el usuario confirmó (para herramientas sensibles).
-        
-        Returns:
-            Resultado de la ejecución.
-        """
-        # Validar
         is_valid, error_msg = self.validate_tool_call(tool_name, parameters)
         if not is_valid:
             return {"error": error_msg}
-        
-        # Verificar confirmación
+
         if self.requires_confirmation(tool_name) and not confirmed:
             return {
                 "requires_confirmation": True,
@@ -96,14 +83,17 @@ class ToolExecutor:
                 "parameters": parameters,
                 "message": f"La acción '{tool_name}' requiere confirmación. ¿Deseas continuar?",
             }
-        
-        # Ejecutar
+
+        # Log visible
+        print(f"\n[TOOL] {tool_name}({', '.join(f'{k}={v!r}' for k, v in parameters.items())})")
+
         tool = self.tools.get_tool_by_name(tool_name)
         result = tool.execute(**parameters)
-        
-        # Loguear
+
+        print(f"[TOOL] → {result}\n")
+
         self.logger.log_execution(tool_name, parameters, result)
-        
+
         return {
             "success": True,
             "tool": tool_name,
