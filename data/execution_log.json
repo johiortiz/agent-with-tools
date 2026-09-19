@@ -1,0 +1,72 @@
+[
+  {
+    "timestamp": "2026-09-19T22:29:03.590707",
+    "tool": "get_order_status",
+    "parameters": {
+      "order_id": "123"
+    },
+    "result": {
+      "order_id": "123",
+      "status": "in_transit",
+      "location": "Madrid",
+      "estimated_delivery": "2026-09-20",
+      "items": [
+        "Laptop",
+        "Mouse"
+      ]
+    }
+  },
+  {
+    "timestamp": "2026-09-19T22:32:41.778258",
+    "tool": "get_order_status",
+    "parameters": {
+      "order_id": "123"
+    },
+    "result": {
+      "order_id": "123",
+      "status": "in_transit",
+      "location": "Madrid",
+      "estimated_delivery": "2026-09-20",
+      "items": [
+        "Laptop",
+        "Mouse"
+      ]
+    }
+  },
+  {
+    "timestamp": "2026-09-19T22:32:42.072123",
+    "tool": "check_delivery_date",
+    "parameters": {
+      "order_id": "456"
+    },
+    "result": {
+      "order_id": "456",
+      "estimated_delivery": "2026-09-18"
+    }
+  },
+  {
+    "timestamp": "2026-09-19T22:32:42.378761",
+    "tool": "list_user_orders",
+    "parameters": {
+      "email": "maria@example.com"
+    },
+    "result": {
+      "user": "María",
+      "email": "maria@example.com",
+      "orders": [
+        {
+          "order_id": "456",
+          "customer_email": "maria@example.com",
+          "status": "delivered",
+          "location": "Barcelona",
+          "estimated_delivery": "2026-09-18",
+          "items": [
+            "Teclado",
+            "Monitor"
+          ]
+        }
+      ],
+      "total_orders": 1
+    }
+  }
+]
